@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>绘制验证码</title>
+</head>
+<body>
+	<canvas id="canvas" width="120" height="30" style="border:1px solid black"></canvas>
+</body>
+<script>
+	var canvas=document.getElementById("canvas");
+	var ctx=canvas.getContext("2d");
+
+
+	canvas.onclick=function()
+	{
+		ctx.clearRect(0,0,120,30);
+		durn();
+	}
+
+	function durn()
+	{
+		var data="ABCDEFGHIJKLMNOPQRSTUVWXTYabcdefghijklmnopqrstuvwxyz01234567890";
+		//随机26个大小写英文字母与数字
+		for(var i=0;i<=90;i+=30)
+		{
+			var c=data[randNum(0,data.length)];
+			ctx.beginPath();
+			// console.log(c);
+			ctx.fillStyle=randColor(60,160);
+			ctx.fillText(c,i+randNum(0,15),randNum(15,30));
+			ctx.closePath();
+		}
+		//绘制随机长度的干扰线
+		for(var i=0;i<10;i++)
+		{
+			ctx.beginPath();
+			ctx.strokeStyle=randColor(60,160);
+			ctx.moveTo(randNum(0,120),randNum(0,30));
+			ctx.lineTo(randNum(0,120),randNum(0,30));
+			ctx.closePath();
+			ctx.stroke();
+		}
+	}
+
+	//首先设置两种随机数
+	function randColor(min,max)
+	{	//随机颜色
+		var r = Math.floor(Math.random()*(max-min)+min);
+		var g = Math.floor(Math.random()*(max-min)+min);
+		var b = Math.floor(Math.random()*(max-min)+min);
+		return "rgb("+r+","+g+","+b+")";
+	}
+	function randNum(min,max)
+	{	//随机数字
+		var num = Math.floor(Math.random()*(max-min)+min);
+		return num;
+	}
+</script>
+</html>

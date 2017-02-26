@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body{
+            text-align: center;
+            background-color: #EEEEEE;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="600" height="600" style="border:1px solid #EEEEEE;background-color: #EEEEEE;"></canvas>
+</body>
+<script type="text/javascript">
+    var canvas=document.getElementsByTagName('canvas')[0];
+    var c=canvas.getContext('2d');
+    c.translate(300,300);
+    var timer='';
+    setInterval(function(){
+        var nowTime=new Date();
+        var s=nowTime.getSeconds();
+        var m=nowTime.getMinutes();
+        var h=nowTime.getHours();
+            var hT=h<10?'0'+h:h;
+            var mT=m<10?'0'+m:m;
+            timer=hT+':'+mT;
+        if(h>=12){
+            h-=12;
+        }
+        m=m*60+s;
+        h=h*3600+m+s;
+        clear();
+        circularDowm();
+        scale();
+        circular();
+        timeText();
+        hours(h);
+        minutes(m);
+        seconds(s);
+        spot();
+    },500);
+    function clear(){
+        c.clearRect(-300,-300,600,600);
+    }
+    function circularDowm(){
+        c.beginPath();
+        c.lineWidth="0.1";
+        c.arc(0,0,200,0,360*Math.PI/180,0);
+        c.fillStyle="#F7F7F7";
+        c.fill();
+        c.stroke();
+        c.closePath();
+    }
+    function circular(){
+        c.beginPath();
+        c.lineWidth="10";
+        c.strokeStyle='black';
+        c.arc(0,0,200,0,360*Math.PI/180,0);
+        c.stroke();
+        c.closePath();
+    }
+    function spot(){
+        c.beginPath();
+        c.lineWidth="16";
+        c.fillStyle='orange';
+        c.strokeStyle='orange';
+        c.arc(0,0,0.1,0,360*Math.PI/180,0);
+        c.stroke();
+        c.closePath();
+    }
+    function scale(){
+        for(var i=0;i<60;i++){
+            c.beginPath();
+            c.lineWidth=3;
+            c.strokeStyle='#7E7C7C';
+            c.lineCap='round';
+            c.moveTo(0,-200);
+            c.lineTo(0,-190);
+            c.stroke();
+            c.rotate(6*Math.PI/180);
+            c.closePath();
+        }
+        for(var i=0;i<12;i++){
+            c.beginPath();
+            c.lineWidth=4;
+            c.strokeStyle='#505050';
+            c.lineCap='round';
+            c.moveTo(0,-200);
+            c.lineTo(0,-180);
+            c.stroke();
+            c.rotate(30*Math.PI/180);
+            c.closePath();
+        }
+        for(var i=0;i<4;i++){
+            c.beginPath();
+            c.lineWidth=5;
+            c.strokeStyle='#3B3B3B';
+            c.lineCap='round';
+            c.moveTo(0,-200);
+            c.lineTo(0,-170);
+            c.stroke();
+            c.rotate(90*Math.PI/180);
+            c.closePath();
+        }
+    }
+    function seconds(s){
+        c.save(); 
+        c.beginPath();
+        c.lineWidth=5;
+        c.strokeStyle='red';
+        c.lineCap='round';
+        c.shadowColor='rgba(80,80,70,0.5)';
+        c.shadowOffsetX=6;
+        c.shadowOffsetY=2;
+        c.rotate(6*s*Math.PI/180);
+        c.moveTo(0,0);
+        c.lineTo(0,20);
+        c.lineTo(0,-150);
+        c.stroke();
+        c.closePath();
+        c.restore();
+    }
+    function minutes(m){
+        c.save(); 
+        c.beginPath();
+        c.lineWidth=7;
+        c.strokeStyle='green';
+        c.lineCap='round';
+        c.shadowColor='rgba(80,80,70,0.2)';
+        c.shadowOffsetX=3;
+        c.shadowOffsetY=5;
+        c.rotate(0.1*m*Math.PI/180);
+        c.moveTo(0,0);
+        c.lineTo(0,20);
+        c.lineTo(0,-120);
+        c.stroke();
+        c.closePath();
+        c.restore();
+    }
+    function hours(h){
+        c.save();
+        c.beginPath();
+        c.lineWidth=8;
+        c.strokeStyle='blue';
+        c.lineCap='round';
+        c.shadowColor='rgba(80,80,70,0.5)';
+        c.shadowOffsetX=2;
+        c.shadowOffsetY=6;
+        c.rotate(30/3600*h*Math.PI/180);
+        c.moveTo(0,0);
+        c.lineTo(0,20);
+        c.lineTo(0,-100);
+        c.stroke();
+        c.closePath();
+        c.restore();
+    }
+    function timeText(){
+        c.beginPath();
+        c.fillStyle='black';
+        c.font='bold 50px Arial';
+        c.shadowColor='rgba(80,80,70,0.2)';
+        c.shadowOffsetX=4;
+        c.shadowOffsetY=4;
+        c.fillText(timer,-68,90);
+        c.stroke();
+        c.closePath();
+    }
+</script>
+</html>

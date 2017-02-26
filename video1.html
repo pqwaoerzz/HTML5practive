@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		body{
+			margin:0;
+			padding:0;
+			width: 500px;
+			margin:50px auto;
+		}
+		.all{
+			position:relative;
+		}
+		#video{
+				/*position:absolute;*/
+		}
+		img{
+			/*width: 200px;
+			height: 150px;*/
+			position: absolute;
+			top: 60px;
+			left: 150px;
+			opacity: 0.8;/*图片透明度*/
+			display: none;
+		}
+		.button{
+			width: 320px;
+			height: 30px;
+			margin:0 auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="all">
+		<video id="video" controls="" poster="video/1.jpg" width="500" height="300">
+			<source src="video/birds.mp4"></source>
+		</video>
+		<img id="img" src="video/0.jpg" alt="" width="200" height="150">
+	</div>
+	<div class="button">
+		<button id="back"><<</button>
+		<button id="play">play</button>
+		<button id="on">>></button>
+		<button id="restart">restart</button>
+		<button onclick="change(this)" value="1">放大</button>
+		<button onclick="change(this)" value="0">还原</button>
+		<button onclick="change(this)" value="2">缩小</button>
+	</div>
+</body>
+<script>
+	video.onclick=function()
+	{
+		if (video.paused)
+		{
+			video.play();
+			img.style.display="none";
+		}
+		else if (video.play)
+		{
+			video.pause();
+			img.style.display="block";
+		}
+	}
+	play.onclick=function()
+	{
+		if (video.paused)
+		{
+			video.play();
+			img.style.display="none";
+		}
+		else if (video.play)
+		{
+			video.pause();
+			img.style.display="block";
+		}
+	}
+	on.onclick=function()
+	{
+		video.currentTime+=5;
+	}
+	back.onclick=function()
+	{
+		video.currentTime-=5;
+	}
+	restart.onclick=function()
+	{
+		video.currentTime=0;
+	}
+
+	function change(btn)
+	{
+		img.style.width="200px";
+		img.style.height="150px";
+		if (btn.value==1)
+		{
+			video.width=video.width*1.1;
+			video.height=video.height*1.1;
+			img.width=img.width*1.1;
+			img.height=img.height*1.1;
+			console.log(img.width);
+			console.log(img.height);
+		}
+		else if (btn.value==0)
+		{
+			video.width=500;
+			video.height=300;
+		}
+		else if(btn.value==2)
+		{
+			video.width=video.width*0.9;
+			video.height=video.height*0.9;
+		}
+	}
+</script>
+</html>
