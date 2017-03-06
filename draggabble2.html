@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>八大行星</title>
+</head>
+<body>
+	<canvas id="canvas" width="800" height="800" style="border: 1px solid black"></canvas>
+</body>
+<script>
+	var canvas=document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+
+	alls();
+	sun();
+	//首先使用循环画出八个圆
+	function alls()
+	{
+		for(var i=0;i<8;i++)
+		{
+			ctx.beginPath();
+			ctx.arc(400,400,(i+1)*50,0,2*Math.PI);//半径：循环的次数加上1再乘以50得到圆的半径。
+			ctx.stroke();
+			ctx.closePath();
+		}
+	}
+	//画出一个太阳
+	function sun()
+	{
+		ctx.beginPath();
+		ctx.save();
+		ctx.arc(400,400,25,0,2*Math.PI);
+		var grd = ctx.createRadialGradient(400,400,0,400,400,25);
+		//设置径向渐变
+		grd.addColorStop(0,"red");
+		// grd.addColorStop(0.8,"pink");
+		ctx.fillStyle=grd;
+		ctx.fill();
+		ctx.restore();
+		ctx.closePath();
+	}
+	const PI=Math.PI*2;//生命一个常量。
+	function times(cycle,y,r,startColor,endColor)
+	{
+		ctx.beginPath();
+		ctx.save();//保存当前环境的状态
+		ctx.translate(400,400);
+		ctx.rotate(PI/cycle*time);
+		ctx.arc(0,y,10,0,PI);
+		var grds = ctx.createRadialGradient(0,y,r,0,y,0);//创建一个径向渐变
+		grds.addColorStop(0,startColor);
+		grds.addColorStop(0.8,endColor);
+		ctx.fillStyle=grds;
+		ctx.fill();
+		ctx.restore();//返回之前保存过的路径状态和属性
+		ctx.closePath();
+	}
+	var time=0;
+	setInterval(function()
+	{
+		ctx.clearRect(0,0,800,800);
+		time++;
+		alls();
+		sun();
+		times(88,-50,10,"#0f0","#abc");
+		times(255,-100,15,"#0ff","#ccc");
+		times(365,-150,20,"#aa5544","#aaa");
+		times(687,-200,25,"#acdfeb","#ddd");
+		times(4333,-250,30,"#acdef1","#ccc");
+		times(10760,-300,35,"#eee","#123abc");
+		times(30799,-350,40,"#fff","#234abc");
+		times(60192,-400,45,"#666","#999");
+	},1)
+</script>
+</html>
