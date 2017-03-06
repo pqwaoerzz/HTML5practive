@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>绘制太极图</title>
+	<style>
+		#canvas{
+			border:1px solid #000;
+			background-color: #ccc;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="400" height="400" ></canvas>
+</body>
+<script>
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+	//以上内容为必须有的步骤！
+	//stroke()空心圆
+	//fill()实心圆
+
+	// 左边半圆
+	ctx.beginPath();
+	ctx.arc(200,200,100,-90*Math.PI/180,90*Math.PI/180,true);//绘制一个弧线或圆形路径(x,y—圆心坐标,r-半径,角度的计算方式，false =顺时针，true=逆时针，默认为顺时针）。
+	ctx.fillStyle="black";//设置fill()实心圆的颜色
+	ctx.fill();
+	ctx.closePath();
+	//右边半圆
+	ctx.beginPath();
+	ctx.arc(200,200,100,-90*Math.PI/180,90*Math.PI/180,false);
+	ctx.fillStyle="white";
+	ctx.fill();
+	ctx.closePath();
+	//上边圆
+	ctx.beginPath();
+	ctx.arc(200,150,50,-90*Math.PI/180,90*Math.PI/180,false);
+	ctx.fillStyle="black";
+	ctx.fill();
+	ctx.closePath();
+	//下边圆
+	ctx.beginPath();
+	ctx.arc(200,250,50,-90*Math.PI/180,90*Math.PI/180,true);
+	ctx.fillStyle="white";
+	ctx.fill();
+	ctx.closePath();
+	//上边白色小圆
+	ctx.beginPath();
+	ctx.arc(200,150,15,0*Math.PI/180,360*Math.PI/180,false);
+	ctx.fillStyle="white";
+	ctx.fill();
+	ctx.closePath();
+	//下边黑色小圆
+	ctx.beginPath();
+	ctx.arc(200,250,15,0*Math.PI/180,360*Math.PI/180,true);
+	ctx.fillStyle="black";
+	ctx.fill();//空心形状
+	ctx.closePath();
+</script>
+</html>
