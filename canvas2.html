@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>制作一个国际象棋棋盘</title>
+	<style>
+		#canvas{
+			border:1px solid #000;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="400" height="400" ></canvas>
+</body>
+<script>
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+	//以上内容为必须有的步骤！
+	
+	for(var j=0;j<8;j++)//控制纵坐标
+	{
+		for(var i=0;i<8;i++)//控制横坐标
+		{
+			if(j%2==0)//用%来判断
+			{
+				if(i%2==0)
+				{
+					ctx.fillRect(i*50,j*50,50,50);
+				}
+				if(i%2==1)
+				{
+					ctx.fillRect(i*50,j*50+50,50,50);
+				}
+			}
+		}
+	}
+	
+</script>
+</html>
